@@ -1,7 +1,7 @@
 {
   "name": "Qtime",
   "description": "Save content to Qtime",
-  "version": "0.15",
+  "version": "0.20",
   "permissions": ["activeTab"],
   "content_scripts": [{
     "matches": ["<all_urls>"],

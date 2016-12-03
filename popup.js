@@ -1,6 +1,6 @@
 
 var url = "http://quotime.me";
-
+var lang = 'en'
 
 function parseTabContent(responseObj) {
 
@@ -35,7 +35,7 @@ function addEntry() {
 			console.log(data);
 			var jsonObj = data.responseJSON;
 			if ("error" in jsonObj)
-				$("#msg").text("error: "+jsonObj.error);
+				$("#msg").text(jsonObj.error);
 			else	
 				$("#msg").text("success!");
 
@@ -43,6 +43,37 @@ function addEntry() {
 	});
 }
 
+function getStatus () {
+	$.ajax({
+		type: "GET",
+		dataType: 'json',
+		url: url+'/api/status',
+		success: function (data, textStatus, jqXHR) {
+
+
+			$('#qtime-add-entry').show();
+			$('.qtime-login-info').show();
+			$('#qtime-username').text(data.username);
+			$('#qtime-not-login').hide();
+			if (data.lang==='cn') {
+				$('#qtime-name').text('名称');
+				$('#qtime-time').text('时长');
+				$('#qtime-category').text('类别');
+				$('#qtime-link').text('链接');
+				$('#qtime-note').text('描述');
+				$('#qtime-add-btn').text('加入我的清单');
+			}
+
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+
+		}
+	});
+
+
+
+
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -54,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		return false;
 	});
 
-
+	getStatus();
 
 
 	chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
