@@ -12,3 +12,23 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     }
 });
 
+// var socket = io('http://localhost:4321');
+
+var chatboxIFrame  = document.createElement ("iframe");
+chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html");
+chatboxIFrame.id="chatbox-iframe";
+
+
+    // var iFrame = document.getElementById( 'iFrame1' );
+
+
+document.body.insertBefore(chatboxIFrame, document.body.firstChild);
+
+
+function resizeIFrameToFitContent() {
+
+    chatboxIFrame.width  = chatboxIFrame.contentWindow.document.body.scrollWidth;
+    chatboxIFrame.height = chatboxIFrame.contentWindow.document.body.scrollHeight;
+}
+
+resizeIFrameToFitContent();

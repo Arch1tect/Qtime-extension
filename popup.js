@@ -77,6 +77,8 @@ function getStatus () {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+
 	var buttons = document.querySelectorAll('button');
 	buttons[0].addEventListener('click', addEntry);
 
@@ -94,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		// the return variable should only have one entry
 		var activeTab = arrayOfTabs[0];
 		var activeTabId = activeTab.id; // or do whatever you need
+		
+		// TBD: activeTab.url and activeTab.title are available, no need
+		// to call .sendMessage if those are only info need from tab
+
 		chrome.tabs.sendMessage(activeTabId, {text: 'report_back'}, parseTabContent);
 
 	});
