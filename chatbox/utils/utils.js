@@ -1,9 +1,19 @@
 (function() {
 
     "use strict";
+    window.chatbox = window.chatbox || {}; 
+    var utils = {};
+    chatbox.utils = utils;
+    
+    function updateIframeSize(state) {
+        var resizeMsg = {};
+        resizeMsg.state = state;
+        resizeMsg.size = { height: $('.socketchatbox-page').height(), width: $('#socketchatbox-body').width()};
+        window.parent.postMessage(JSON.stringify(resizeMsg),
+              "*");
 
-    var utils = chatbox.utils;
-
+    }
+    utils.updateIframeSize = updateIframeSize;
 
     // generate a unique guid for each browser, will pass in cookie
     utils.guid = function() {

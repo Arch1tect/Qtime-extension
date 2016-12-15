@@ -1,7 +1,6 @@
 (function() {
     "use strict";
-    window.chatbox = {};
-    chatbox.utils = {};
+    window.chatbox = window.chatbox || {};
     chatbox.ui = {};
     chatbox.ui.init = []; //init is an array of functions
     chatbox.historyHandler = {};

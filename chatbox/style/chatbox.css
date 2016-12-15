@@ -12,6 +12,13 @@ ul {
   list-style: none;
   word-wrap: break-word;
 }
+body {
+  background-color: transparent !important;
+}
+
+/*::-webkit-scrollbar { 
+    display: none; 
+}*/
 .socketchatbox-resize {
 
   top:0px;
@@ -40,8 +47,8 @@ ul {
   display: none;
   height: 350px;
   width: 350px;
-  /* border: 1px solid lightgray; */
-}
+/*  outline: 1px solid black; 
+*/}
 
 
 .socketchatbox-inputMessage-div {
@@ -133,10 +140,9 @@ ul {
 .socketchatbox-page {
   font-size: 12px; 
   margin: 0;
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   padding: 0;
   position: fixed;
-  /* border: 1px solid #0FB5DA; */*/;
   bottom:0px;
   /*overflow: auto;*/
   max-width:100%;
@@ -169,10 +175,10 @@ ul {
   height: 100%;
   overflow-y: scroll;
   background: #EDEDED;
-  /* border: 1px solid lightgray; */
+  border: 1px solid; 
   padding-right: 10px;
   padding-left: 10px;
-  /*border-bottom-width: 0px;*/
+  border-bottom-width: 0px;
 }
 
 .socketchatbox-message-wrapper {
