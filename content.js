@@ -30,19 +30,19 @@ function resizeIFrameToFitContent(e) {
 	if (msg.state ==='full size') {
 		chatboxIFrame.style.width  = "100%";
 		chatboxIFrame.style.height = "100%";
-
 	}
 	else if (msg.state === 'minimize') {
 		chatboxIFrame.style.width  = "200px";
 		chatboxIFrame.style.height = "30px";
 	}
+	else if (msg.state === 'close') {	//only hide but still running?
+		chatboxIFrame.style.display  = "none";
+	}
 	else {
-
 		var size = msg.size;
 		chatboxIFrame.style.width  = size.width + "px";
 		chatboxIFrame.style.height = size.height + "px";
 		chatboxIFrame.style.background = 'transparent';
-
 	}
 }
 

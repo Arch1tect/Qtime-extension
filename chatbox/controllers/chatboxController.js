@@ -37,6 +37,8 @@
 
 		ui.$cross.click(function() {
 			ui.$chatBox.hide();
+			utils.updateIframeSize('close'); 
+
 		});
 
 
