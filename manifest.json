@@ -1,5 +1,5 @@
 {
-  "name": "Qtime",
+  "name": "Chatbox Extension",
   "description": "Save content to Qtime",
   "version": "0.20",
   "permissions": ["activeTab"],

@@ -18,11 +18,8 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    var port = 4321;
-    var hostname = location.hostname;
-    chatbox.domain = location.protocol + "//" + hostname + ":" + port;
-    console.log('chatbox.domain: ' + chatbox.domain);
-    chatbox.domain = "http://localhost:4321";
+    chatbox.domain = "https://quotime.me";
+
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
     // And this uuid should always be passed on login, it's used to identify/combine user,
@@ -78,12 +75,12 @@
         ui.show();
         console.log('open chatbox');
 
-        if (typeof(chatbox.roomID) == 'undefined') 
-            chatbox.roomID = '01cfcd4f6b8770febfb40cb906715822';
-        
+        // if (typeof(chatbox.roomID) == 'undefined') 
+        chatbox.roomID = location.search;
+        console.log('room ' + chatbox.roomID);
 
         // now make your connection with server!
-        chatbox.socket = io(chatbox.domain);
+        chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
         chatbox.socket.joined = false;
         socketEvent.register();
     };

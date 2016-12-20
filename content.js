@@ -1,3 +1,5 @@
+var chatboxCreated = false;
+var chatboxIFrame;
 // Listen for messages
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 	// If the received message has the expected format...
@@ -10,8 +12,21 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 		console.log(responseObj);
 		sendResponse(responseObj);
 
-		document.body.insertBefore(chatboxIFrame, document.body.firstChild);
 
+	}
+	else if (msg.text === 'open_chatbox') {
+
+		if (!chatboxCreated) {
+			chatboxIFrame  = document.createElement ("iframe");
+			chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html?"+location.href);
+			chatboxIFrame.id="chatbox-iframe";
+			chatboxIFrame.allowtransparency = true;
+			document.body.insertBefore(chatboxIFrame, document.body.firstChild);
+			chatboxCreated = true;
+		}
+		else{
+			chatboxIFrame.style.display  = "block";
+		}
 	}
 });
 
@@ -19,14 +34,15 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 
 
-var chatboxIFrame  = document.createElement ("iframe");
-chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html");
-chatboxIFrame.id="chatbox-iframe";
-chatboxIFrame.allowtransparency = true;
+
 
 function resizeIFrameToFitContent(e) {
+	if (!e || !e.data )
+		return;
 
 	var msg = JSON.parse(e.data);
+	if (!msg.state)
+		return;
 	if (msg.state ==='full size') {
 		chatboxIFrame.style.width  = "100%";
 		chatboxIFrame.style.height = "100%";

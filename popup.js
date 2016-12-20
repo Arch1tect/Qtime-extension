@@ -1,5 +1,5 @@
 
-var url = "http://quotime.me";
+var url = "https://quotime.me";
 var lang = 'en'
 
 function parseTabContent(responseObj) {
@@ -43,7 +43,7 @@ function addEntry() {
 	});
 }
 
-function getStatus () {
+function getStatus() {
 	$.ajax({
 		type: "GET",
 		dataType: 'json',
@@ -62,6 +62,7 @@ function getStatus () {
 				$('#qtime-link').text('链接');
 				$('#qtime-note').text('描述');
 				$('#qtime-add-btn').text('加入我的清单');
+				$('#open-chatbox').text('打开聊天盒');
 			}
 
 		},
@@ -75,12 +76,30 @@ function getStatus () {
 
 }
 
+function openChatbox() {
+	chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
+
+		// since only one tab should be active and in the current window at once
+		// the return variable should only have one entry
+		var activeTab = arrayOfTabs[0];
+		var activeTabId = activeTab.id; // or do whatever you need
+		
+		// TBD: activeTab.url and activeTab.title are available, no need
+		// to call .sendMessage if those are only info need from tab
+
+		chrome.tabs.sendMessage(activeTabId, {text: 'open_chatbox'}, null);
+
+	});
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
 
 
-	var buttons = document.querySelectorAll('button');
-	buttons[0].addEventListener('click', addEntry);
+	// var addEntryBtn = document.querySelectorAll('button');
+	// buttons[0].addEventListener('click', addEntry);
+	$('#qtime-add-btn').click(addEntry);
+	$('#open-chatbox').click(openChatbox);
 
 	$('body').on('click', 'a', function(){
 		chrome.tabs.create({url: $(this).attr('href')});
